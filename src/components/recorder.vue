@@ -328,6 +328,7 @@
         }).catch(error => {
           this.$eventBus.$emit('end-upload', { status: 'fail', response: error })
         })
+        
       },
       toggleRecorder () {
         if (this.attempts && this.recorder.records.length >= this.attempts) {
@@ -348,8 +349,10 @@
         this.recorder.stop()
 
         let record = this.recorder.lastRecord();
+
+        this.upload(record);
         // console.log(this.recorder.recordList())
-        this.recordList = this.recorder.recordList()
+        // this.recordList = this.recorder.recordList()
 
       },
       removeRecord (idx) {
