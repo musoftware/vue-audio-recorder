@@ -2,9 +2,9 @@
 
 > Audio recorder for Vue.js. It allows to create, play, download and store records on a server.
 
-#### [Live demo](https://jsfiddle.net/grishkovelli/rb1anxyj/)
+#### [Live demo](https://jsfiddle.net/musoftware/rb1anxyj/)
 
-![](https://raw.githubusercontent.com/grishkovelli/vue-audio-recorder/master/screenshot.png)
+![](https://raw.githubusercontent.com/musoftware/vue-audio-recorder/master/screenshot.png)
 
 ### Features
 

@@ -1,6 +1,6 @@
 <style lang="scss">
   .ar {
-    width: 420px;
+    width: 100%;
     font-family: 'Roboto', sans-serif;
     border-radius: 16px;
     background-color: #FAFAFA;
@@ -206,11 +206,11 @@
           @click.native="stopRecorder"/>
       </div>
 
-      <div class="ar-recorder__records-limit" v-if="attempts">Attempts: {{attemptsLeft}}/{{attempts}}</div>
+      <!-- <div class="ar-recorder__records-limit" v-if="attempts">Attempts: {{attemptsLeft}}/{{attempts}}</div> -->
       <div class="ar-recorder__duration">{{recordedTime}}</div>
       <div class="ar-recorder__time-limit" v-if="time">Record duration is limited: {{time}}m</div>
 
-      <div class="ar-records">
+      <!-- <div class="ar-records">
         <div
           class="ar-records__record"
           :class="{'ar-records__record--selected': record.id === selected.id}"
@@ -238,9 +238,9 @@
               :headers="headers"
               :upload-url="uploadUrl"/>
         </div>
-      </div>
+      </div> -->
 
-      <audio-player :record="selected"/>
+      <!-- <audio-player :record="selected"/> -->
     </div>
   </div>
 </template>
@@ -310,6 +310,25 @@
       this.stopRecorder()
     },
     methods: {
+      upload (record) {
+        if (!record.url) {
+          return
+        }
+
+        this.$eventBus.$emit('start-upload')
+
+        const data = new FormData()
+        data.append('audio', record.blob, `${this.filename}.mp3`)
+
+        const headers = Object.assign(this.headers, {})
+        headers['Content-Type'] = `multipart/form-data; boundary=${data._boundary}`
+ 
+        this.$http.post(this.uploadUrl, data, { headers: headers }).then(resp => {
+          this.$eventBus.$emit('end-upload', { status: 'success', response: resp })
+        }).catch(error => {
+          this.$eventBus.$emit('end-upload', { status: 'fail', response: error })
+        })
+      },
       toggleRecorder () {
         if (this.attempts && this.recorder.records.length >= this.attempts) {
           return
@@ -327,7 +346,11 @@
         }
 
         this.recorder.stop()
+
+        let record = this.recorder.lastRecord();
+        // console.log(this.recorder.recordList())
         this.recordList = this.recorder.recordList()
+
       },
       removeRecord (idx) {
         this.recordList.splice(idx, 1)
