@@ -32,7 +32,6 @@ npm i vue-audio-recorder --save
 
 | Prop                  | Type     | Description                                                              |
 | --------------------- | -------- | ------------------------------------------------------------------------ |
-| attempts              | Number   | Number of recording attempts                                             |
 | headers               | Object   | HTTP headers                                                             |
 | time                  | Number   | Time limit for the record (minutes)                                      |
 | bit-rate              | Number   | Default: 128 (only for MP3)                                              |
@@ -75,7 +74,6 @@ npm i vue-audio-recorder --save
 ```html
   <audio-recorder
     upload-url="YOUR_API_URL"
-    :attempts="3"
     :time="2"
     :headers="headers"
     :before-recording="callback"

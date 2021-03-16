@@ -13,7 +13,6 @@
       upload-url="some url"
       filename="ninja"
       format="wav"
-      :attempts="3"
       :time="2"
       :headers="headers"
       :before-recording="callback"

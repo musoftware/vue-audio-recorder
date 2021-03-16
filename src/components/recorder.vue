@@ -182,7 +182,7 @@
 </style>
 
 <template>
-  <div class="ar">
+  <div class="">
     <div class="ar__overlay" v-if="isUploading"></div>
     <div class="ar-spinner" v-if="isUploading">
       <div class="ar-spinner__dot"></div>
@@ -206,7 +206,6 @@
           @click.native="stopRecorder"/>
       </div>
 
-      <!-- <div class="ar-recorder__records-limit" v-if="attempts">Attempts: {{attemptsLeft}}/{{attempts}}</div> -->
       <div class="ar-recorder__duration">{{recordedTime}}</div>
       <div class="ar-recorder__time-limit" v-if="time">Record duration is limited: {{time}}m</div>
 
@@ -257,7 +256,6 @@
   export default {
     mixins: [UploaderPropsMixin],
     props: {
-      attempts : { type: Number },
       time     : { type: Number },
 
       bitRate    : { type: Number, default: 128   },
@@ -331,9 +329,6 @@
         
       },
       toggleRecorder () {
-        if (this.attempts && this.recorder.records.length >= this.attempts) {
-          return
-        }
 
         if (!this.isRecording || (this.isRecording && this.isPause)) {
           this.recorder.start()
@@ -380,9 +375,6 @@
       }
     },
     computed: {
-      attemptsLeft () {
-        return this.attempts - this.recordList.length
-      },
       iconButtonType () {
         return this.isRecording && this.isPause ? 'mic' : this.isRecording ? 'pause' : 'mic'
       },
