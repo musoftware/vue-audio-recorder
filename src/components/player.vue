@@ -1,6 +1,5 @@
 <style lang="scss">
   .ar-player {
-    width: 380px;
     height: unset;
     border: 0;
     border-radius: 0;
@@ -24,20 +23,20 @@
     &-bar {
       display: flex;
       align-items: center;
+      width: 100%;
       height: 38px;
       padding: 0 12px;
       margin: 0 5px;
     }
 
     &-actions {
-      width: 55%;
       display: flex;
       align-items: center;
       justify-content: space-around;
     }
 
     &__progress {
-      width: 160px;
+      width: 100%;
       margin: 0 8px;
     }
 
