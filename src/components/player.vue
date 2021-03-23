@@ -15,9 +15,6 @@
       border-radius: 24px;
       margin: 0 0 0 5px;
 
-      & > .ar-player__progress {
-        width: 125px;
-      }
     }
 
     &-bar {
